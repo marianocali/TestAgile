@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,9 +27,22 @@ public class JsoupCssSelectSnippet {
         // so providing InputStream through classpath resources is not a case
         String resourcePath = "./samples/startbootstrap-freelancer-gh-pages-cut.html";
 
+        //this find the button with id make-everything-ok-button
         String cssQuery = "button[id=\"make-everything-ok-button\"]";
 
         Optional<Elements> elementsOpt = findElementsByQuery(new File(resourcePath), cssQuery);
+
+        Elements listParent = elementsOpt.get().parents();
+
+        if(listParent != null){
+            System.out.println("path to the element");
+            for(int i = listParent.size()-1; i>=0; i--){
+                Element element = listParent.get(i);
+                System.out.print(element.tag() + " " + element.id() + " " + element.className() + " > ");
+            }
+            System.out.println();
+        }
+
 
         Optional<List<String>> elementsAttrsOpts = elementsOpt.map(buttons ->
                 {
@@ -66,5 +80,7 @@ public class JsoupCssSelectSnippet {
             return Optional.empty();
         }
     }
+
+
 
 }
