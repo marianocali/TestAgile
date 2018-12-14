@@ -26,7 +26,7 @@ public class JsoupCssSelectSnippet {
         // so providing InputStream through classpath resources is not a case
         String resourcePath = "./samples/startbootstrap-freelancer-gh-pages-cut.html";
 
-        String cssQuery = "div[id=\"success\"] button[class*=\"btn-primary\"]";
+        String cssQuery = "button[id=\"make-everything-ok-button\"]";
 
         Optional<Elements> elementsOpt = findElementsByQuery(new File(resourcePath), cssQuery);
 
